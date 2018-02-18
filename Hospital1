@@ -1,0 +1,29 @@
+router eigrp 99
+network 10.1.0.0 0.0.0.255
+network 192.168.100.8 0.0.0.3
+network 192.168.100.32 0.0.0.3
+eigrp router-id 2.2.2.2
+exit
+ipv6 unicast-routing 
+ipv6 router eigrp 99
+eigrp router-id 2.2.2.2
+no shutdown 
+exit
+int s0/0/1
+ipv6 eigrp 99
+int s0/0/0
+ipv6 eigrp 99
+int g0/0
+ipv6 eigrp 99
+exit
+int s0/0/0
+bandwidth 2000
+exit
+router eigrp 99
+passive-interface g0/0
+exit
+int g0/0
+standby 1 ip 10.1.0.1
+standby 1 preempt 
+standby 1 priority 150
+standby version 2

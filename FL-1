@@ -1,0 +1,28 @@
+int range f0/3-4
+channel-group 1 mode active 
+int range f0/1-2
+channel-group 3 mode active 
+exit
+int range f0/3-4
+switchport mode trunk 
+switchport trunk native vlan 99
+int port-channel 1
+switchport mode trunk 
+switchport trunk native vlan 99
+switchport nonegotiate 
+int range f0/1-2
+switchport mode trunk 
+switchport trunk native vlan 99
+int port-channel 3
+switchport mode trunk
+switchport trunk native vlan 99
+switchport nonegotiate 
+exit
+vtp mode client 
+vtp domain TownEd
+vtp password TWE_123!
+vtp version 2
+spanning-tree mode rapid-pvst 
+int range f0/10-24
+spanning-tree bpduguard enable 
+spanning-tree portfast

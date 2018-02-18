@@ -1,0 +1,4 @@
+ip route 0.0.0.0 0.0.0.0 s0/0/0
+int g0/0
+standby 1 ip 10.1.0.1
+standby version 2

@@ -1,0 +1,37 @@
+router eigrp 99
+network 10.10.0.0 0.0.0.255
+network 10.15.0.0 0.0.0.255
+network 10.20.0.0 0.0.0.255
+network 192.168.100.20 0.0.0.3
+network 192.168.100.32 0.0.0.3
+eigrp router-id 3.3.3.3
+exit
+ipv6 unicast-routing 
+ipv6 router eigrp 99
+eigrp router-id 3.3.3.3
+no shutdown 
+exit
+int g0/0.10
+ipv6 eigrp 99
+int g0/0.15
+ipv6 eigrp 99
+int g0/0.20
+ipv6 eigrp 99
+exit
+int s0/0/0
+ipv6 eigrp 99
+int s0/0/1
+ipv6 eigrp 99
+int s0/1/0
+ipv6 eigrp 99
+exit
+int s0/0/1
+bandwidth 2000
+exit
+router eigrp 99
+passive-interface g0/0.10
+passive-interface g0/0.15
+passive-interface g0/0.20
+exit
+int g0/0
+no sh
